@@ -6,6 +6,8 @@ const User = require('./models/User');
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 
+
+// JWT Configuration
 let ExtractJwt = passportJWT.ExtractJwt;
 let JwtStrategy = passportJWT.Strategy;
 
@@ -28,10 +30,15 @@ const getUser = async obj => {
     });
 };
 
-db.authenticate().then(() => console.log("DB connected")).catch(err => console.log(err));
-app.use(express.urlencoded({ extended: true }));
 passport.use(strategy);
 
+db.authenticate().then(() => console.log("DB connected")).catch(err => console.log(err)); // DB Connection
+
+app.use(express.urlencoded({ extended: true }));
+
+
+
+// ENDPOINT
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
@@ -82,7 +89,7 @@ app.post('/register', async (req, res) => {
 });
 
 app.get(
-    '/protected',
+    '/cobaakses',
     passport.authenticate('jwt', {session: false}),
     (req, res) => {
         res.json({message: 'Success!'});
@@ -90,7 +97,7 @@ app.get(
 )
 
 
-
+// SERVER PORT
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });

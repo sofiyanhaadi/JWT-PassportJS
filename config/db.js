@@ -7,6 +7,4 @@ const db = new sequelize("db_nodejwt", "root", "", {
 db.sync({});
 
 
-
-
 module.exports = db;

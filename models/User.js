@@ -9,8 +9,6 @@ const User = db.define(
     }
 );
 
-
 User.sync({});
-
 
 module.exports = User;
